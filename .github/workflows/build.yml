@@ -6,6 +6,7 @@ on:
       - main
     tags:
       - product/[1-9]+.[0-9]+.[0-9]+
+      - searhch/[1-9]+.[0-9]+.[0-9]+
 
 jobs:
   build-deploy-product:
@@ -26,10 +27,28 @@ jobs:
       - run: nx test product
       - run: nx build product
 
+  build-deploy-search:
+    name: build_deploy_search
+    runs-on: ubuntu-latest
+    if: startsWith (github.ref, 'refs/tags/search')
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.15.1'
+      - run: npm install -g npm@8.1.3
+      - run: npm i -g nx
+      - run: npm install
+      - run: nx test search
+      - run: nx build search
+
   Build_Test_Analyse_Merge:
     name: build_test_analyse
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v2
         with:
