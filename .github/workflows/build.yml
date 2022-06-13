@@ -10,6 +10,9 @@ on:
       - release/*/[1-9]+.[0-9]+.[0-9]+ #release/u-b/x.x.x
 env:
   DAY_OF_WEEK: Monday
+  app: ''
+  stage: ''
+  environment: ''
 
 jobs:
   build-deploy-product:
@@ -50,10 +53,6 @@ jobs:
 
   tags_test:
     name: tags_test
-    env:
-      app: ''
-      stage: ''
-      environment: ''
     runs-on: ubuntu-latest
     if: startsWith (github.ref, 'refs/tags/release') #release/1.0.0
     steps:
@@ -63,9 +62,6 @@ jobs:
         with:
           string: ${{github.ref_name}}
           split-by: '/'
-        # env:
-        #   app: ${{ steps.split.outputs._0}}
-        #   stage: ${{ steps.split.outputs._1}}
       - name: set app name
         run: |
           echo "app=${{ steps.split.outputs._0}}" >> $GITHUB_ENV
