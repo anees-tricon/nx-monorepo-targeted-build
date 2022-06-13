@@ -63,7 +63,7 @@ jobs:
       - run: echo "${{ steps.split.outputs._1}}"
 
   tags_test_1:
-    name: tags_test
+    name: tags_test_1
     runs-on: ubuntu-latest
     if: startsWith (github.ref, 'refs/tags/release')
     steps:
@@ -74,10 +74,8 @@ jobs:
           string: ${{github.ref_name}}
           split-by: '/'
           limit: -1
-      - name: deploy steps
-        run: |
-          echo "${{ steps.split1.outputs._0}}"
-          echo "${{ steps.split1.outputs._1}}"
+      - run: echo "${{ steps.split1.outputs._0}}"
+      - run: echo "${{ steps.split1.outputs._1}}"
 
   Env_variables_test:
     name: Env_variables_test
