@@ -22,7 +22,6 @@ jobs:
           node-version: '14.15.1'
       - run: npm install -g npm@8.1.3
       - run: npm i -g nx
-      - run: npx nx report
       - name: Get the tag name
         run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
       # - run: npm install
