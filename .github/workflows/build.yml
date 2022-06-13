@@ -66,10 +66,10 @@ jobs:
         if: startsWith ({{steps.split.outputs._1}}, 'u') # u-b,u-g
         env:
           environment: uat
-        if: startsWith ({{steps.split.outputs._1}}, 'p') # p-b,p-g
-        env:
-          environment: prod
-      
+        # if: startsWith ({{steps.split.outputs._1}}, 'p') # p-b,p-g
+        # env:
+        #   environment: prod
+
       # - run: npm run ${{steps.split.outputs._0}}:build:lambda:uat
       # - run: npm run ${{steps.split.outputs._0}}:deploy:lambda:${{steps.split.outputs._1}}
 
