@@ -69,11 +69,12 @@ jobs:
           stage: ${{ steps.split.outputs._1}}
       - run: echo "${{ steps.split.outputs._0}}" # app name -> product/search
       - run: echo "${{ steps.split.outputs._1}}"
-      # - name: get env from the stage
-      #   run: echo "enviroment $environment"
-      #   if: startsWith (${{steps.test.stage}}, 'u') # u-b,u-g
-      #   env:
-      #     environment: uat
+      - name: get env from the stage
+        run: echo "app $app stage $stage"
+        run: echo "app $steps.test.app stage $steps.test.stage"
+        # if: startsWith (${{steps.test.stage}}, 'u') # u-b,u-g
+        # env:
+        #   environment: uat
       # if: startsWith ({{steps.split.outputs._1}}, 'p') # p-b,p-g
       # env:
       #   environment: prod
