@@ -54,13 +54,16 @@ jobs:
     if: startsWith (github.ref, 'refs/tags/release')
     steps:
       - name: get the information from the tag
+        uses: rishabhgupta/split-by@v1
+        id: split
+        with:
+          string: ${{github.ref_name}}
+          split-by: '/'
         run: echo "the tag is $tag"
+        run: echo "${{ steps.split.outputs._0}}"
+        run: echo "${{ steps.split.outputs._1}}"
         env:
           tag: ${{ github.ref_name }}
-      - name: get the information from the tag 2
-        run: echo "the tag is $tag"
-        env:
-          tag: ${{GITHUB_REF/refs\/tags\//}}"
 
   Env_variables_test:
     name: Env_variables_test
