@@ -50,6 +50,10 @@ jobs:
 
   tags_test:
     name: tags_test
+    id: tags_test
+    env:
+      app: ''
+      stage: ''
     runs-on: ubuntu-latest
     if: startsWith (github.ref, 'refs/tags/release') #release/1.0.0
     steps:
@@ -59,21 +63,27 @@ jobs:
         with:
           string: ${{github.ref_name}}
           split-by: '/'
-        env:
-          stage: ${{ steps.split.outputs._1}}
-      - name: set the app name and stage
-        id: test
-        run: echo "app $app stage $stage"
-        env:
-          app: ${{ steps.split.outputs._0}}
-          stage: ${{ steps.split.outputs._1}}
-      - run: echo "${{ steps.split.outputs._0}}" # app name -> product/search
-      - run: echo "${{ steps.split.outputs._1}}"
-      - name: get env from the stage
-        run: echo "app $app stage $stage"
-        # if: startsWith ({{steps.test.stage}}, 'u') # u-b,u-g
         # env:
-        #   environment: uat
+        #   app: ${{ steps.split.outputs._0}}
+        #   stage: ${{ steps.split.outputs._1}}
+      - name: set app name
+        run: |
+          echo "app=${{ steps.split.outputs._0}}" >> $GITHUB_ENV
+      - run: echo "app = $app"
+
+      # - name: set the app name and stage
+      #   id: test
+      #   run: echo "app $app stage $stage"
+      #   env:
+      #     app: ${{ steps.split.outputs._0}}
+      #     stage: ${{ steps.split.outputs._1}}
+      # - run: echo "${{ steps.split.outputs._0}}" # app name -> product/search
+      # - run: echo "${{ steps.split.outputs._1}}"
+      # - name: get env from the stage
+      #   run: echo "app $app stage $stage"
+      # if: startsWith ({{steps.test.stage}}, 'u') # u-b,u-g
+      # env:
+      #   environment: uat
       # if: startsWith ({{steps.split.outputs._1}}, 'p') # p-b,p-g
       # env:
       #   environment: prod
