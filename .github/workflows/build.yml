@@ -74,10 +74,15 @@ jobs:
         run: |
           echo "stage=${{ steps.split.outputs._1}}" >> $GITHUB_ENV
       - run: echo "stage = $stage"
-      - name: set environment name
+      - name: set environment name for UAT
         if: startsWith (env.stage, 'u')
         run: |
           echo "environment=uat" >> $GITHUB_ENV
+      - run: echo "environment = $environment"
+      - name: set environment name for PROD
+        if: startsWith (env.stage, 'p')
+        run: |
+          echo "environment=prod" >> $GITHUB_ENV
       - run: echo "environment = $environment"
 
       # - name: set the app name and stage
