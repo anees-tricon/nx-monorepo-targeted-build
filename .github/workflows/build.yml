@@ -59,16 +59,24 @@ jobs:
         with:
           string: ${{github.ref_name}}
           split-by: '/'
+        env:
+          stage: ${{ steps.split.outputs._1}}
+      - name: set the app name and stage
+        id: test
+        run: echo "app $app stage $stage"
+        env:
+          app: ${{ steps.split.outputs._0}}
+          stage: ${{ steps.split.outputs._1}}
       - run: echo "${{ steps.split.outputs._0}}" # app name -> product/search
       - run: echo "${{ steps.split.outputs._1}}"
-      - name: get env from the stage
-        run: echo "enviroment $environment"
-        if: startsWith ({{steps.split.outputs._1}}, 'u') # u-b,u-g
-        env:
-          environment: uat
-        # if: startsWith ({{steps.split.outputs._1}}, 'p') # p-b,p-g
-        # env:
-        #   environment: prod
+      # - name: get env from the stage
+      #   run: echo "enviroment $environment"
+      #   if: startsWith (${{steps.test.stage}}, 'u') # u-b,u-g
+      #   env:
+      #     environment: uat
+      # if: startsWith ({{steps.split.outputs._1}}, 'p') # p-b,p-g
+      # env:
+      #   environment: prod
 
       # - run: npm run ${{steps.split.outputs._0}}:build:lambda:uat
       # - run: npm run ${{steps.split.outputs._0}}:deploy:lambda:${{steps.split.outputs._1}}
