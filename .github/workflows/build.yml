@@ -62,6 +62,23 @@ jobs:
       - run: echo "${{ steps.split.outputs._0}}"
       - run: echo "${{ steps.split.outputs._1}}"
 
+  tags_test_1:
+    name: tags_test
+    runs-on: ubuntu-latest
+    if: startsWith (github.ref, 'refs/tags/release')
+    steps:
+      - name: get the information from the tag
+        uses: xom9ikk/split@v1
+        id: split1
+        with:
+          string: ${{github.ref_name}}
+          split-by: '/'
+          limit: -1
+      - name: deploy steps
+        run: |
+          echo "{{ steps.split1.outputs._0}}"
+          echo "{{ steps.split1.outputs._1}}"
+
   Env_variables_test:
     name: Env_variables_test
     runs-on: ubuntu-latest
