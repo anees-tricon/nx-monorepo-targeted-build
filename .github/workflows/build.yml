@@ -59,8 +59,11 @@ jobs:
         with:
           string: ${{github.ref_name}}
           split-by: '/'
-      - run: echo "${{ steps.split.outputs._0}}"
-      - run: echo "${{ steps.split.outputs._1}}"
+      - run: echo "$app_name"
+      - run: echo "$version"
+    env:
+      app_name: ${{ steps.split.outputs._0}}
+      version: ${{ steps.split.outputs._1}}
 
   Env_variables_test:
     name: Env_variables_test
