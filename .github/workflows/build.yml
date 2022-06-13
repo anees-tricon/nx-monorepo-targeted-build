@@ -25,6 +25,10 @@ jobs:
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      - name: Log the version 1
+        run: echo "Version: ${GITHUB_REF/refs\/tags\//}"
+      - name: log the version 2
+        run: echo $VERSION
     # - run: npm install
     # - run: npx nx affected:build --base=origin/main~1 --head=origin/main
     # - run: npx nx run-many --target=test --all
