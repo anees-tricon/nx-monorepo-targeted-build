@@ -7,6 +7,7 @@ on:
     tags:
       - product/[1-9]+.[0-9]+.[0-9]+ #product/x.x.x
       - search/[1-9]+.[0-9]+.[0-9]+ #search/x.x.x
+      - release/[1-9]+.[0-9]+.[0-9]+ #release/x.x.x
 env:
   DAY_OF_WEEK: Monday
 
@@ -46,6 +47,16 @@ jobs:
       - run: npm install
       - run: nx test search
       - run: nx build search
+
+  tags_test:
+    name: tags_test
+    runs-on: ubuntu-latest
+    if: startsWith (github.ref, 'refs/tags/release')
+    steps:
+      - name: get the information from the tag
+        run: echo "the tag is $tag"
+        env:
+          tag: ${{ github.event.release.tag_name }}
 
   Env_variables_test:
     name: Env_variables_test
