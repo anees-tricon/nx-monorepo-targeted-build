@@ -50,7 +50,6 @@ jobs:
 
   tags_test:
     name: tags_test
-    id: tags_test
     env:
       app: ''
       stage: ''
