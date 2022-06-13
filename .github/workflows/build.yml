@@ -60,10 +60,10 @@ jobs:
           string: ${{github.ref_name}}
           split-by: '/'
         run: echo "the tag is $tag"
-        run: echo "${{ steps.split.outputs._0}}"
-        run: echo "${{ steps.split.outputs._1}}"
         env:
           tag: ${{ github.ref_name }}
+      - run: echo "${{ steps.split.outputs._0}}"
+      - run: echo "${{ steps.split.outputs._1}}"
 
   Env_variables_test:
     name: Env_variables_test
