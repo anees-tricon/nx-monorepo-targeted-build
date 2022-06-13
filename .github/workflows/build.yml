@@ -57,6 +57,11 @@ jobs:
         run: echo "the tag is $tag"
         env:
           tag: ${{ github.ref_name }}
+    steps:
+      - name: get the information from the tag 2
+        run: echo "the tag is $tag"
+        env:
+          tag: ${GITHUB_REF/refs\/tags\//}"
 
   Env_variables_test:
     name: Env_variables_test
