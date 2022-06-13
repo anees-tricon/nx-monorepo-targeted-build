@@ -76,8 +76,8 @@ jobs:
           limit: -1
       - name: deploy steps
         run: |
-          echo "{{ steps.split1.outputs._0}}"
-          echo "{{ steps.split1.outputs._1}}"
+          echo "${{ steps.split1.outputs._0}}"
+          echo "${{ steps.split1.outputs._1}}"
 
   Env_variables_test:
     name: Env_variables_test
