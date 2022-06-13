@@ -71,10 +71,9 @@ jobs:
       - run: echo "${{ steps.split.outputs._1}}"
       - name: get env from the stage
         run: echo "app $app stage $stage"
-        # run: echo "app $steps.test.app stage $steps.test.stage"
-        # if: startsWith (${{steps.test.stage}}, 'u') # u-b,u-g
-        # env:
-        #   environment: uat
+        if: startsWith ($stage, 'u') # u-b,u-g
+        env:
+          environment: uat
       # if: startsWith ({{steps.split.outputs._1}}, 'p') # p-b,p-g
       # env:
       #   environment: prod
