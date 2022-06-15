@@ -28,7 +28,7 @@ module.exports = {
           'u-g': "echo 'Product deploy worker u-g'",
           'u-b': "echo 'Product deploy worker u-b'",
           'p-g': "echo 'Product deploy worker p-g'",
-          'p-b': "echo 'Product deploy worker p-b'",
+          'p-b': "echo '$TEST_ENV Product deploy worker p-b'",
         },
       },
     },

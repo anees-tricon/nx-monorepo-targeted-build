@@ -12,6 +12,7 @@ env:
   app: ''
   stage: ''
   environment: ''
+  TEST_ENV: ${{ secrets.TEST_ENV }}
 
 jobs:
   build-deploy-product:
